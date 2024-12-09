@@ -230,7 +230,7 @@ void WiFi :: RunModeThread()
             wifi_scan(&wifi_aps);
             state = eWifi_NotConnected;
 
-            printf("Auto connect to %s with pass %s (mode=%d)\n", cfg_ssid.c_str(), cfg_pass.c_str(), cfg_authmode);
+            printf("Auto connect to %s with password of length %d (mode=%d)\n", cfg_ssid.c_str(), cfg_pass.length(), cfg_authmode);
             if(cfg_ssid.length() > 0) {
                 if (wifi_wifi_connect_known_ssid(cfg_ssid.c_str(), cfg_pass.c_str(), (uint8_t)cfg_authmode) == ERR_OK) {
                     state = eWifi_Connected;
