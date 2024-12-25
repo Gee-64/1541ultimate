@@ -4,7 +4,9 @@
 .global _ultimate_run_rbf_start
 .type _ultimate_run_rbf_start, @object
 _ultimate_run_rbf_start:
+#ifndef SOFTBOOTER
 .incbin "ultimate_run.swp"
+#endif
 .global _ultimate_run_rbf_end
 _ultimate_run_rbf_end:
 
@@ -21,6 +23,7 @@ _ultimate_app_end:
 .global _rom_pack_start
 .type _rom_pack_start, @object
 _rom_pack_start:
+#ifndef SOFTBOOTER
 .incbin "ar5pal.bin"
 .incbin "ar6pal.bin"
 .incbin "final3.bin"
@@ -33,6 +36,7 @@ _rom_pack_start:
 .incbin "ar5ntsc.bin"
 .incbin "kcs.bin"
 .incbin "epyx.bin"
+#endif
 .global _rom_pack_end
 _rom_pack_end:
 
@@ -42,7 +46,9 @@ _rom_pack_end:
 .global _recovery_app_start
 .type _recovery_app_start, @object
 _recovery_app_start:
+#ifndef SOFTBOOTER
 .incbin "recovery.app"
+#endif
 .global _recovery_app_end
 _recovery_app_end:
 
@@ -51,6 +57,8 @@ _recovery_app_end:
 .global _ultimate_recovery_rbf_start
 .type _ultimate_recovery_rbf_start, @object
 _ultimate_recovery_rbf_start:
+#ifndef SOFTBOOTER
 .incbin "ultimate_recovery.swp"
+#endif
 .global _ultimate_recovery_rbf_end
 _ultimate_recovery_rbf_end:

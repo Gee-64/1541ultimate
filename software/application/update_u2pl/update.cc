@@ -24,8 +24,15 @@ extern const char _index_html_end[1];
 
 void do_update(void)
 {
+#ifndef SOFTBOOTER
     setup("\033\025** Ultimate II+L Updater **\n\033\037");
+#else
+    setup("\033\025** Ultimate II+L Softbooter **\n\033\037");
+    softboot_ultimate_app(&_ultimate_app_start);
+#endif
 
+
+#ifndef SOFTBOOTER
     Flash *flash2 = get_flash();
     flash2->protect_disable();
     check_flash_disk();
@@ -49,6 +56,7 @@ void do_update(void)
         write_protect(flash2, 2048);
     }
     reset_config(flash2);
+#endif
     turn_off();
 }
 

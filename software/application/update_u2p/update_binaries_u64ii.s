@@ -4,7 +4,9 @@
 .global _u64_rbf_start
 .type _u64_rbf_start, @object
 _u64_rbf_start:
+#ifndef SOFTBOOTER
 .incbin "u64.swp"
+#endif
 .global _u64_rbf_end
 _u64_rbf_end:
 

@@ -34,8 +34,15 @@ void do_update(void)
     REMOTE_FLASHSELCK_0;
     REMOTE_FLASHSELCK_1;
 
+#ifndef SOFTBOOTER
     setup("\033\025** Ultimate II+ Updater **\n\033\037");
+#else
+    setup("\033\025** Ultimate II+ Softbooter **\n\033\037");
+#endif
 
+    softboot_ultimate_app(&_ultimate_app_start);
+
+#ifndef SOFTBOOTER
 /*
     if(user_interface->popup("Flash Recovery?", BUTTON_YES | BUTTON_NO) == BUTTON_YES) {
     	REMOTE_FLASHSEL_0;
@@ -75,6 +82,7 @@ void do_update(void)
 
         write_protect(flash2, 2048);
     }
+#endif
     turn_off();
 }
 

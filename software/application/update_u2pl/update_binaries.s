@@ -4,7 +4,9 @@
 .global _u2p_ecp5_impl1_bit_start
 .type _u2p_ecp5_impl1_bit_start, @object
 _u2p_ecp5_impl1_bit_start:
+#ifndef SOFTBOOTER
 .incbin "u2p_ecp5_impl1.bit"
+#endif
 .global _u2p_ecp5_impl1_bit_end
 _u2p_ecp5_impl1_bit_end:
 

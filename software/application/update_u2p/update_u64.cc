@@ -44,6 +44,7 @@ const char *getBoardRevision(void)
 
 void do_update(void)
 {
+#ifndef SOFTBOOTER
     setup("\033\025** Ultimate 64 Updater **\n\033\037");
 
     Flash *flash2 = get_flash();
@@ -109,6 +110,10 @@ void do_update(void)
     }
 
     reset_config(flash2);
+#else
+    setup("\033\025** Ultimate 64 Softbooter **\n\033\037");
+    softboot_ultimate_app(&_ultimate_app_start);
+#endif
     turn_off();
 }
 
