@@ -234,3 +234,60 @@ static void write_protect(Flash *flash, int kilobytes)
     flash->protect_enable();
     console_print(screen, "Done!                            \n");
 }
+
+static void cleanup() {
+    user_interface->host->release_ownership();
+}
+
+static void (*function)();
+
+static void jump_run(uint32_t a)
+{
+    uint32_t *dp = (uint32_t *)&function;
+    *dp = a;
+    function();
+}
+
+static void softboot_ultimate_app(uint32_t *app) {
+    uint32_t load = *app++;
+    uint32_t length = *app++;
+    uint32_t start = *app++;
+
+    console_print(screen, "\n\033\027Softbooting firmware...\n\n");
+#if 0
+    console_print(screen,
+        "\n"
+        "Softboot:\n"
+        "\n"
+        " 1. Disable interrupts\n"
+        " 2. Copy 0x%08x bytes from $%08x" /* Exactly 40 chars so no newline here */
+        "    to $%08x.\n"
+        " 3. Restore C64 mode\n"
+        " 4. Jump to $%08x\n"
+        "\n"
+        "Here we go...\n"
+        "\n",
+        length, app, load, start);
+#endif
+    vTaskDelay(2000 / portTICK_PERIOD_MS);
+
+    console_print(screen, "Disable IRQs. ");
+    printf("Disable IRQs\n");
+    ioWrite8(ITU_IRQ_GLOBAL, 0);
+
+    console_print(screen, "Copy. ");
+    printf("Copy Ultimate app 0x%08x @ $%08x => $%08x\n", length, app, load);
+    memcpy((void *)load, (const void *)app, length);
+
+    console_print(screen, "Restore and jump!\n\n");
+    printf("Restore C64\n");
+    cleanup();
+
+    printf("Jump to Ultimate app entry point $%08x\n", start);
+    jump_run(start);
+
+    printf("Failed to softboot ultimate app!\n");
+    console_print(screen, "** Failed to soft boot Ultimate app, giving up! **\n");
+    while(1)
+        ;
+}
