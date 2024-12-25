@@ -37,6 +37,10 @@ static void status_callback(void *user)
 
 void do_update(void)
 {
+#ifdef SOFTBOOTER
+    setup("\033\025** Ultimate II+L Softbooter **\n\033\037");
+    softboot_ultimate_app(&_ultimate_app_start);
+#else
     setup("\033\025** Ultimate II+L Updater **\n\033\037");
 
     Flash *flash2 = get_flash();
@@ -105,6 +109,7 @@ void do_update(void)
     }
 
     turn_off();
+#endif
 }
 
 extern "C" int ultimate_main(int argc, char *argv[])

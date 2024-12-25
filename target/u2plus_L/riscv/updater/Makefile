@@ -112,6 +112,10 @@ PATH_INC =  $(addprefix -I, $(VPATH))
 OPTIONS  = -march=$(MARCH) -mabi=$(MABI) -ffunction-sections -fdata-sections -nostartfiles -mno-fdiv
 OPTIONS += -gdwarf-2 -Os -DRISCV -DUSB2503 -DOS -DIOBASE=0x10000000 -DU2P_IO_BASE=0x10100000 -DCLOCK_FREQ=50000000 -Wno-write-strings -DRECOVERYAPP=1
 COPTIONS = $(OPTIONS) -std=gnu99
+ifdef SOFTBOOTER
+OPTIONS += -DSOFTBOOTER=1
+ASMOPTIONS = -x assembler-with-cpp
+endif
 CPPOPT   = $(OPTIONS) -fno-exceptions -fno-rtti -fno-threadsafe-statics -fpermissive
 LINK 	 = ./linker.x
 LFLAGS   = --gc-sections

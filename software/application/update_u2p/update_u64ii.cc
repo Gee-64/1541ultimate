@@ -42,6 +42,10 @@ static void status_callback(void *user)
 
 void do_update(void)
 {
+#ifdef SOFTBOOTER
+    setup("\033\025** Ultimate 64 Elite-II Softbooter **\n\033\037");
+    softboot_ultimate_app(&_ultimate_app_start);
+#else
     setup("\033\025** Ultimate 64 Elite-II Updater **\n\033\037");
 
     Flash *flash2 = get_flash();
@@ -136,6 +140,7 @@ void do_update(void)
     // assuming that the ESP32 is running still, we should be able to send a slip message to it
     wifi_command_init();
     turn_off();
+#endif
 }
 
 extern "C" int ultimate_main(int argc, char *argv[])
