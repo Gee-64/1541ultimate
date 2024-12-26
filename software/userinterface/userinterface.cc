@@ -369,6 +369,8 @@ void UserInterface :: set_screen_title()
     screen->output("\eO");
     screen->move_cursor(0, 1);
 	screen->repeat('\002', width);
+    screen->move_cursor(width-4, 1);
+    screen->output("[G]");
     screen->move_cursor(0, height-1);
 	screen->scroll_mode(false);
 	screen->repeat('\002', width);

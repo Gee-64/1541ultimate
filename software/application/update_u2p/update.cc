@@ -30,12 +30,17 @@ extern const char _index_html_end[1];
 
 void do_update(void)
 {
+#if 0
     REMOTE_FLASHSEL_1;
     REMOTE_FLASHSELCK_0;
     REMOTE_FLASHSELCK_1;
+#endif
 
-    setup("\033\025** Ultimate II+ Updater **\n\033\037");
+    setup("\033\025** Ultimate II+ Softbooter **\n\033\037");
 
+    softboot_ultimate_app(&_ultimate_app_start);
+
+#if 0
 /*
     if(user_interface->popup("Flash Recovery?", BUTTON_YES | BUTTON_NO) == BUTTON_YES) {
     	REMOTE_FLASHSEL_0;
@@ -77,6 +82,7 @@ void do_update(void)
 
         write_protect(flash2);
     }
+#endif
     turn_off();
 }
 
