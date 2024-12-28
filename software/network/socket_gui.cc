@@ -19,6 +19,7 @@
 #include "tree_browser.h"
 #include "versions.h"
 #include "home_directory.h"
+#include "product.h"
 
 SocketGui socket_gui; // global that causes us to exist
 
@@ -39,17 +40,12 @@ SocketGui :: SocketGui()
 
 void socket_gui_task(void *a)
 {
-    char title[64];
-#if U64
-    sprintf(title, "\eA*** Ultimate-64 %s (1%b) *** Remote ***\eO", APPL_VERSION, getFpgaVersion());
-#else
-    if(getFpgaCapabilities() & CAPAB_ULTIMATE2PLUS) {
-    	sprintf(title, "\eA*** Ultimate-II Plus %s (1%b) *** Remote ***\eO", APPL_VERSION, getFpgaVersion());
-    } else {
-    	sprintf(title, "\eA**** 1541 Ultimate %s (%b) - Remote ****\eO", APPL_VERSION, getFpgaVersion());
-    }
-#endif
 	SocketStream *str = (SocketStream *)a;
+
+	char product[41];
+	char title[81];
+	getProductVersionString(product, sizeof(product));
+	sprintf(title, "\eA*** %s *** Remote ***\eO", product);
 
 	HostStream *host = new HostStream(str);
 //	Screen *scr = host->getScreen();

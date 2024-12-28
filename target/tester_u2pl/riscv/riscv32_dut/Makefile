@@ -35,6 +35,7 @@ SRCS_CC	 =  memory.cc \
 			i2c_drv.cc \
 			flash.cc \
 			w25q_flash.cc \
+			product.cc \
 			codec.cc \
 			network_interface.cc \
 			network_test.cc \

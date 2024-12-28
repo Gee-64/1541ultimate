@@ -29,6 +29,7 @@
 #include "u64_tester.h"
 #include "i2c_drv_sockettest.h"
 #include "stream_textlog.h"
+#include "product.h"
 
 typedef struct {
 	const char *fileName;
@@ -662,22 +663,6 @@ void write_log(void)
 
 extern "C" {
     void codec_init(void);
-
-    bool isEliteBoard(void)
-    {
-        uint8_t rev = (U2PIO_BOARDREV >> 3);
-        if (rev == 0x13) {
-            return true;
-        }
-        if (rev == 0x14) { // may be either!
-            uint8_t joyswap = C64_PLD_JOYCTRL;
-            if (joyswap & 0x80) {
-                return true;
-            }
-            return false;
-        }
-        return false;
-    }
 
     void main_task(void *context)
 	{
