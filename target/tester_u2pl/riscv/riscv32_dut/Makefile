@@ -37,6 +37,7 @@ SRCS_CC	 =  memory.cc \
 			w25q_flash.cc \
 			product.cc \
 			codec.cc \
+			network_config.cc \
 			network_interface.cc \
 			network_test.cc \
 			rmii_interface.cc \

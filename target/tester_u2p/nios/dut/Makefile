@@ -37,6 +37,7 @@ SRCS_CC	 =  dut_main.cc \
 			w25q_flash.cc \
 			flash_switch.cc \
 			product.cc \
+			network_config.cc \
 			network_interface.cc \
 			network_test.cc \
 			rmii_interface.cc \
