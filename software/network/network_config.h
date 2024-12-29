@@ -4,6 +4,7 @@
 #include "config.h"
 
 #define CFG_NETWORK_HOSTNAME               0x10
+#define CFG_NETWORK_PASSWORD               0x11
 
 
 class NetworkConfig : ConfigurableObject {
