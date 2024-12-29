@@ -10,6 +10,7 @@ static char default_hostname[42];
 // Network configuration settings
 struct t_cfg_definition network_config[] = {
     { CFG_NETWORK_HOSTNAME,        CFG_TYPE_STRING,     "Host Name",                        "%s", NULL,       3, 31, (int)default_hostname},
+    { CFG_NETWORK_PASSWORD,        CFG_TYPE_STRPASS,    "Network Password",                 "%s", NULL,       3, 31, (int)"" },
     { CFG_TYPE_END,                CFG_TYPE_END,        "",                                 "",   NULL,       0,  0, 0 }
 };
 
