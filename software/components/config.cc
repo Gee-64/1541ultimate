@@ -194,10 +194,17 @@ ConfigStore :: ConfigStore(ConfigPage *page, const char *name,
     staleFlash = false;
     
     for(int i=0;i<64;i++) {
-        if(defs[i].type == CFG_TYPE_END)
+        uint8_t t = defs[i].type;
+        if(t == CFG_TYPE_END || defs[i].id == 0xFF)
             break;
-        if(defs[i].id == 0xFF)
-            break;
+        else if(t == CFG_TYPE_STRING || t == CFG_TYPE_STRFUNC || t == CFG_TYPE_STRPASS) {
+            if(defs[i].max > cfg_definition_string_limit) {
+                printf("Truncating oversized string configuration '%s' with max=%d (limit is %d)! Please fix definition!\n",
+                       defs[i].item_text, defs[i].max, cfg_definition_string_limit);
+                defs[i].max = cfg_definition_string_limit;
+            }
+        }
+
         ConfigItem *item = new ConfigItem(this, &defs[i]);
         items.append(item);
     }
@@ -624,7 +631,7 @@ int ConfigItem :: pack(uint8_t *buffer, int len)
 // width is the actual width in characters on the screen, and two additional bytes are needed to set the color
 const char *ConfigItem :: get_display_string(char *buffer, int width)
 {
-	static char buf[32];
+    static char buf[cfg_definition_string_limit + 1];
 
     memset(buffer, ' ', width+2);
     buffer[width+2] = '\0';

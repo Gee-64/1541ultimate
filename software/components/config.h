@@ -48,6 +48,7 @@ struct t_cfg_definition
     int  min, max;
     long int def; // also used as pointer to default string. For 64 bit systems it needs to be a long!
 };
+const int cfg_definition_string_limit = 63;  // the 'max' value of configuration strings may not exceed this value
 
 class ConfigPage;
 class ConfigStore;
