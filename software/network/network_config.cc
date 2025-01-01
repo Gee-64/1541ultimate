@@ -11,6 +11,11 @@ static char default_hostname[42];
 struct t_cfg_definition network_config[] = {
     { CFG_NETWORK_HOSTNAME,        CFG_TYPE_STRING,     "Host Name",                        "%s", NULL,       3, 31, (int)default_hostname},
     { CFG_NETWORK_PASSWORD,        CFG_TYPE_STRPASS,    "Network Password",                 "%s", NULL,       3, 31, (int)"" },
+    { CFG_NETWORK_ULTIMATE_IDENT_SERVER, CFG_TYPE_ENUM, "Socket Server Ident",              "%s", en_dis,     0,  1, 1 },
+    { CFG_NETWORK_ULTIMATE_DMA_SERVER, CFG_TYPE_ENUM,   "Socket Server Control",            "%s", en_dis,     0,  1, 1 },
+    { CFG_NETWORK_TELNET_SERVER,   CFG_TYPE_ENUM,       "Telnet Server Remote Menu",        "%s", en_dis,     0,  1, 1 },
+    { CFG_NETWORK_FTP_SERVER,      CFG_TYPE_ENUM,       "FTP Server File Management",       "%s", en_dis,     0,  1, 1 },
+    { CFG_NETWORK_HTTP_SERVER,     CFG_TYPE_ENUM,       "Web Server Remote Control",        "%s", en_dis,     0,  1, 1 },
     { CFG_TYPE_END,                CFG_TYPE_END,        "",                                 "",   NULL,       0,  0, 0 }
 };
 
