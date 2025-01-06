@@ -22,31 +22,8 @@
 #include "usb_base.h"
 #include "screen_logger.h"
 #include "flash.h"
+#include "product.h"
 
-static const char *getBoardRevision(void)
-{
-	uint8_t rev = (U2PIO_BOARDREV >> 3);
-
-	switch (rev) {
-	case 0x10:
-		return "U64 Prototype";
-	case 0x11:
-		return "U64 V1.1 (Null Series)";
-	case 0x12:
-		return "U64 V1.2 (Mass Prod)";
-	case 0x13:
-	    return "U64 V1.3 (Elite)";
-    case 0x14:
-        return "U64 V1.4 (Std/Elite)";
-    case 0x15:
-        return "U64E V2.0 (Early Proto)";
-    case 0x16:
-        return "U64E V2.1 (Null Series)";
-    case 0x17:
-        return "U64E V2.2 (Mass Prod)";
-	}
-	return "Unknown";
-}
 
 Screen *screen;
 Screen *screen2;
