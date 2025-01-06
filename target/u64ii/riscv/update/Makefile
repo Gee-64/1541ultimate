@@ -8,7 +8,7 @@ MABI  ?= ilp32
 
 include ../../../common/environment.mk
 
-FPGA_PATH ?= /home/gideon/proj/ult64/target/u64_artix/u64_artix.runs/impl_1
+FPGA_PATH ?= ../../../u64_artix/u64_artix.runs/impl_1
 #external
 
 PRJ      =  update
