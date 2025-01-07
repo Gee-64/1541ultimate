@@ -1,3 +1,2 @@
 all::
-	diamondc make.tcl >build.log
-
+	echo diamondc make.tcl >build.log
