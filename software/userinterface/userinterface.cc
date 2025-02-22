@@ -365,6 +365,7 @@ void UserInterface :: set_screen_title()
     int len = title.length();
     int hpos = (width - len) / 2;
 
+    const char *patch = "G3";
     screen->clear();
     screen->move_cursor(hpos, 0);
     screen->output("\eA");
@@ -372,6 +373,12 @@ void UserInterface :: set_screen_title()
     screen->output("\eO");
     screen->move_cursor(0, 1);
 	screen->repeat('\002', width);
+    if (*patch) {
+        screen->move_cursor(width - 3 - strlen(patch), 1);
+        screen->output("[");
+        screen->output(patch);
+        screen->output("]");
+    }
     screen->move_cursor(0, height-1);
 	screen->scroll_mode(false);
 	screen->repeat('\002', width);
